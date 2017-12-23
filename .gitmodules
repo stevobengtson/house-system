@@ -1,0 +1,6 @@
+[submodule "house-api"]
+	path = house-api
+	url = git@github.com:stevobengtson/graphql-elixir.git
+[submodule "house-gui"]
+	path = house-gui
+	url = git@github.com:stevobengtson/react-apollo-graphql.git
