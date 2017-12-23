@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
+  api:
+    build: ./house-api
+    command: mix phx.server
+    environment:
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=db
+    volumes:
+      - ./house-api:/app
+
+  web:
+    build: ./house-gui
+    command: npm start -- -H 0.0.0.0
+    volumes:
+      - ./house-gui:/app
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
